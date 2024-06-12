@@ -67,8 +67,8 @@ video {
   content: "EAT. DRINK. PLAY.";
   position: absolute;
   color: #000;
+  /* top: -6px; */
   left: -6px;
-  top: -3px;
   -webkit-text-stroke: 1px #95c11e;
   z-index: -1;
 }
