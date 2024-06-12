@@ -68,7 +68,7 @@ video {
   position: absolute;
   color: #000;
   /* top: -6px; */
-  left: -6px;
+  /* left: -6px; */
   -webkit-text-stroke: 1px #95c11e;
   z-index: -1;
 }
@@ -88,5 +88,5 @@ video {
 
 #page2 {
   height: 100vh;
-  width: 1005;
+  width: 100%;
 }
