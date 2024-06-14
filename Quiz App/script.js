@@ -1,45 +1,93 @@
 const questions = [
   {
-    questions: "Which is largest animal in the world?",
+    questions: "What does HTML stand for?",
     answers: [
-      {text: "Shark", correct: false},
-      {text: "Blue whale", correct: true},
-      {text: "Elephant", correct: false},
-      {text: "Giraffe", correct: false},
+      { text: "Hyper Text Markup Language", correct: true },
+      { text: "Home Tool Markup Language", correct: false },
+      { text: "Hyperlinks and Text Markup Language", correct: false },
+      { text: "Hyper Tool Markup Language", correct: false }
+    ]
+  },
+  {
+    questions: "Which of the following is the correct HTML element for the largest heading?",
+    answers: [
+      { text: "<h6>", correct: false },
+      { text: "<h1>", correct: true },
+      { text: "<head>", correct: false },
+      { text: "<h4>", correct: false }
+    ]
+  },
+  {
+    questions: "What is the correct HTML element for inserting a line break",
+    answers: [
+      { text: "<break>", correct: false },
+      { text: "<lb>", correct: false },
+      { text: "<br>", correct: true },
+      { text: "<line>", correct: false }
+    ]
+  },
+  {
+    questions: "Which character is used to indicate an end tag?",
+    answers: [
+      { text: "*", correct: false },
+      { text: "/", correct: true },
+      { text: ">", correct: false },
+      { text: "<", correct: false }
+    ]
+  },
+  {
+    questions: "How can you make a numbered list?",
+    answers: [
+      {text: "<ul>", correct: false },
+      {text: "<ol>", correct: true},
+      {text: "<dl>", correct: false},
+      {text: "<list>", correct: false}
+    ]
+  },/*
+  {
+    questions: "What is the correct HTML element to define important text?",
+    answers: [
+      {text: "<b>", correct: false },
+      {text: "<important>", correct: },
+      {text: "<strong>", correct: },
+      {text: "<i>", correct: }
 
     ]
-  }, 
+  },
   {
-    questions: "Which is smallest continent in the world?",
+    questions: " ",
     answers: [
-      {text: "Asia", correct: false},
-      {text: "Blue whale", correct: true},
-      {text: "Elephant", correct: false},
-      {text: "Giraffe", correct: false},
+      {text: " ", correct: },
+      {text: " ", correct: },
+      {text: " ", correct: },
+      {text: " ", correct: },
+
     ]
   },
   {
-    questions: "Which is smallest continent in the world?",
+    questions: " ",
     answers: [
-      {text: "Asia", correct: false},
-      {text: "Blue whale", correct: true},
-      {text: "Elephant", correct: false},
-      {text: "Giraffe", correct: false},
+      {text: " ", correct: },
+      {text: " ", correct: },
+      {text: " ", correct: },
+      {text: " ", correct: },
+
     ]
   },
   {
-    questions: "Which is smallest continent in the world?",
+    questions: " ",
     answers: [
-      {text: "Asia", correct: false},
-      {text: "Blue whale", correct: true},
-      {text: "Elephant", correct: false},
-      {text: "Giraffe", correct: false},
+      {text: " ", correct: },
+      {text: " ", correct: },
+      {text: " ", correct: },
+      {text: " ", correct: },
+
     ]
-  }
+  },*/
 ];
 
 const questionElement = document.getElementById("question");
-const answerButton = document.getElementById("answer-buttons");
+const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
 
 let currentQuestionIndex = 0;
@@ -53,14 +101,25 @@ function startQuiz() {
 }
 
 function showQuestion() {
-  let currentQuestionIndex = questions[currentQuestionIndex];
-  let questionNo = currentQuestionIndex +1;
-  questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
+  resetState();
+  let currentQuestion = questions[currentQuestionIndex];
+  let questionNo = currentQuestionIndex + 1;
+  questionElement.innerHTML = questionNo + ". " + currentQuestion.questions;
 
-  currentQuestion.answers.array.forEach(answer => {
+  currentQuestion.answers.forEach(answer => {
     const button = document.createElement("button");
     button.innerHTML = answer.text;
-    button.classList.add('btn');
-    answerButton.appendChild(button);
+    button.classList.add("btn");
+    answerButtons.appendChild(button);
   });
 }
+
+
+function resetState() {
+  nextButton.style.display = "none";
+  while(answerButtons.firstChild) {
+    answerButtons.removeChild(answerButtons.firstChild);
+  }
+}
+
+startQuiz();
