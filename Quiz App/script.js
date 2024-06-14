@@ -5,17 +5,18 @@ const questions = [
       { text: "Hyper Text Markup Language", correct: true },
       { text: "Home Tool Markup Language", correct: false },
       { text: "Hyperlinks and Text Markup Language", correct: false },
-      { text: "Hyper Tool Markup Language", correct: false }
-    ]
+      { text: "Hyper Tool Markup Language", correct: false },
+    ],
   },
   {
-    questions: "Which of the following is the correct HTML element for the largest heading?",
+    questions:
+      "Which of the following is the correct HTML element for the largest heading?",
     answers: [
       { text: "<h6>", correct: false },
       { text: "<h1>", correct: true },
       { text: "<head>", correct: false },
-      { text: "<h4>", correct: false }
-    ]
+      { text: "<h4>", correct: false },
+    ],
   },
   {
     questions: "What is the correct HTML element for inserting a line break",
@@ -23,8 +24,8 @@ const questions = [
       { text: "<break>", correct: false },
       { text: "<lb>", correct: false },
       { text: "<br>", correct: true },
-      { text: "<line>", correct: false }
-    ]
+      { text: "<line>", correct: false },
+    ],
   },
   {
     questions: "Which character is used to indicate an end tag?",
@@ -32,18 +33,18 @@ const questions = [
       { text: "*", correct: false },
       { text: "/", correct: true },
       { text: ">", correct: false },
-      { text: "<", correct: false }
-    ]
+      { text: "<", correct: false },
+    ],
   },
   {
     questions: "How can you make a numbered list?",
     answers: [
-      {text: "<ul>", correct: false },
-      {text: "<ol>", correct: true},
-      {text: "<dl>", correct: false},
-      {text: "<list>", correct: false}
-    ]
-  },/*
+      { text: "<ul>", correct: false },
+      { text: "<ol>", correct: true },
+      { text: "<dl>", correct: false },
+      { text: "<list>", correct: false },
+    ],
+  } /*
   {
     questions: "What is the correct HTML element to define important text?",
     answers: [
@@ -83,7 +84,7 @@ const questions = [
       {text: " ", correct: },
 
     ]
-  },*/
+  },*/,
 ];
 
 const questionElement = document.getElementById("question");
@@ -106,20 +107,65 @@ function showQuestion() {
   let questionNo = currentQuestionIndex + 1;
   questionElement.innerHTML = questionNo + ". " + currentQuestion.questions;
 
-  currentQuestion.answers.forEach(answer => {
+  currentQuestion.answers.forEach((answer) => {
     const button = document.createElement("button");
     button.innerHTML = answer.text;
     button.classList.add("btn");
     answerButtons.appendChild(button);
+    if (answer.correct) {
+      button.dataset.correct = answer.correct;
+    }
+    button.addEventListener("click", slectAnswer);
   });
 }
 
-
 function resetState() {
   nextButton.style.display = "none";
-  while(answerButtons.firstChild) {
+  while (answerButtons.firstChild) {
     answerButtons.removeChild(answerButtons.firstChild);
   }
 }
+
+function slectAnswer(e) {
+  const selectedBtn = e.target;
+  const isCorrect = selectedBtn.dataset.correct === "true";
+  if (isCorrect) {
+    selectedBtn.classList.add("correct");
+    score++;
+  } else {
+    selectedBtn.classList.add("incorrect");
+  }
+  Array.from(answerButtons.children).forEach((button) => {
+    if (button.dataset.correct === "true") {
+      button.classList.add("correct");
+    }
+    button.disabled = true;
+  });
+  nextButton.style.display = "block";
+}
+
+function showScore() {
+  resetState();
+  questionElement.innerHTML = `You scored ${score} out of ${questions.length}!`;
+  nextButton.innerHTML = "Play Again";
+  nextButton.style.display = "block";
+}
+
+function handleNextButton() {
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    showQuestion();
+  } else {
+    showScore();
+  }
+}
+
+nextButton.addEventListener("click", () => {
+  if (currentQuestionIndex < questions.length) {
+    handleNextButton();
+  } else {
+    startQuiz();
+  }
+});
 
 startQuiz();
