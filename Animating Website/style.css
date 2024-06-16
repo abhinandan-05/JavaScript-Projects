@@ -65,10 +65,10 @@ video {
 
 #page1 h1::before {
   content: "EAT. DRINK. PLAY.";
+  top: -6px;
+  left: -6px;
   position: absolute;
   color: #000;
-  /* top: -6px; */
-  /* left: -6px; */
   -webkit-text-stroke: 1px #95c11e;
   z-index: -1;
 }
