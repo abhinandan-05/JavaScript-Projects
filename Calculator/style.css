@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #002339;
+  color: #fff;
+}
+
+.main-container {
+  width: 200px;
+}
+
+#input-box {
+  height: 30px;
+  width: 250px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+button {
+  height: 40px;
+  width: 50px;
+  margin-top: 6px;
+  margin-right: 5px;
+  background: lightpink;
+  border: none;
+  border-radius: 4px;
+}
